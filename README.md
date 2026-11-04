@@ -16,6 +16,14 @@
 
 ---
 
+> ### 💼 Investment, Compute Grants & Enterprise Licensing (Investimenti & Partnership Industriali)
+> 🇬🇧 **Sentinel** is scaling the **Geodesic Pyramidal Sphere Architecture (`R-08`)** from 50M to **110M–1B+ parameters**, backed by **18 industrial patent filings** (Non-Euclidean Geodesic Mesh, Isomorphic `SSvvv` Lexical-Voice Engine, Post-Quantum Tamper-Resistant Keystone Security, Edge & Autonomous Systems).  
+> **Open to Seed / Deep-Tech Investment, GPU/TPU Compute Grants, and Enterprise R&D Partnerships.**  
+> 🇮🇹 **Aperto a Investimenti Seed / Deep-Tech, Grant Computazionali GPU/TPU e Licenze Industriali Enterprise.**  
+> 📩 **Contact Founder & Inventor Thomas Seri:** 🌐 **[www.sentinelhub.eu](https://www.sentinelhub.eu)** | 🐙 **[GitHub (@Thomasseri)](https://github.com/Thomasseri)** | 🤗 **[Hugging Face (@SentinelHub)](https://huggingface.co/SentinelHub)** | 💬 **[Open an Inquiry / Issue](https://github.com/Thomasseri/R-08/issues/new)**
+
+---
+
 ## 🌍 Sentinel gpTommy 32k European Language Suite & R-08 Models
 
 The **gpTommy 32k** family provides native whole-word `SSvvv` vocabularies (`32,768` tokens each, with 100% shared control/space/numeric/alphabet IDs) across the 5 major European languages:
