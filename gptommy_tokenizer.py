@@ -13,7 +13,7 @@ __jurisdiction__ = "Court of Milan, Italy"
 """gpTommy 32k Tokenizer: Tokenizer nativo ad alta efficienza per la lingua italiana.
 Autore & Ideatore: Thomas Seri (Sentinel)
 Ecosistema: Sentinel LifeOS (https://www.sentinelhub.eu)
-Modelli di riferimento: Sentinel R-08 v7, v7.2, v7.2a, v7.2b
+Modelli di riferimento: Sentinel R-08 v7, v7.2, v7.2a
 
 Vocabolario strutturato a schede (SSvvv):
 - 32.768 token totali (ID 0..32767)
