@@ -2,29 +2,30 @@
   <img src="assets/r08_logo.jpg" width="320" alt="Sentinel R08 — Pocket Core" style="border-radius: 16px;" />
 </p>
 
-# 🇫🇷 gpTommy-32k-FR — Native 32,768-Token Vocabulary & Tokenizer for Français (French) (Francese)
+# 🇫🇷 gpTommy-32k-FR — Native 32,768-Token Vocabulary & Tokenizer v2 for Français (French) (Francese)
 
 [![Official Site](https://img.shields.io/badge/Official%20Site-sentinelhub.eu-007acc.svg)](https://www.sentinelhub.eu)
 [![Ecosystem](https://img.shields.io/badge/Ecosystem-Sentinel%20LifeOS-purple.svg)](https://www.sentinelhub.eu)
+[![Tokenizer](https://img.shields.io/badge/Tokenizer-v2.0%20Implicit%20Space%20%2B%20Lossless%20Case-brightgreen.svg)](https://github.com/Thomasseri/gpTommy-32k-FR)
 [![Vocabulary](https://img.shields.io/badge/Vocabulary-32,768%20Tokens-blue.svg)](https://github.com/Thomasseri/gpTommy-32k-FR)
 [![Language](https://img.shields.io/badge/Language-FR%20Native%2091%25-green.svg)](https://github.com/Thomasseri/gpTommy-32k-FR)
 [![Author](https://img.shields.io/badge/Author-Thomas%20Seri%20(Sentinel)-orange.svg)](https://www.sentinelhub.eu)
 
-> **Deterministic 32,768-token (`32k`) lexical vocabulary and tokenizer specifically engineered for the Français (French) (`fr`) language.**  
+> **Deterministic 32,768-token (`32k`) lexical vocabulary and Tokenizer v2 (Implicit Space + 100% Lossless Case) specifically engineered for the Français (French) (`fr`) language.**  
 > **Author & Creator:** Thomas Seri (Sentinel)  
 > **Reference Ecosystem:** [Sentinel LifeOS](https://www.sentinelhub.eu) & **Sentinel R-08** Geodesic Model Family
 
 ---
 
-## ⚠️ Corrections (7 November 2026)
+## 🚀 Tokenizer v2 Update & Corrections Log (7 November 2026)
 
-We re-checked the code published in this repository and found the following errors. Below: what was stated before and what we measured now.
+This repository now includes **Tokenizer v2 (`v2.0.0`, `implicit_space=True` by default)**, which eliminates wasted single-space tokens between words and preserves 100% lossless capitalization, while keeping optional `implicit_space=False` compatibility for v1 checkpoints.
 
-| # | Item | Before (stated) | Now (measured) | Status |
+| # | Aspect | Tokenizer v1 (Legacy) | **Tokenizer v2 Updated (`v2.0.0`, default)** | Status |
 |---|---|---|---|---|
-| 1 | `gptommy_tokenizer.py` | Self-contained tokenizer, ready-to-run usage example | The file **could not be imported** on any Python version: `SyntaxError` because `from __future__ import annotations` came after the license header | **Fixed** in this update (only the import line was moved; the license is unchanged) |
-| 2 | Lossless round-trip | `decode(encode(text))` returns the original text | It returns the text **fully lowercased** (e.g. `"The bearing…"` → `"the bearing…"`): capital letters are lost | Documented, not yet fixed |
-| 3 | Sequence length | Whole words = 1 token each | The space between words is a **separate token** (id 10). On the Italian edition we measured that spaces are 41.1% of all tokens (2.33 tokens per word overall). Not yet measured for this language | Documented |
+| 1 | `gptommy_tokenizer.py` | Had a `SyntaxError` (`from __future__ import annotations` placed after the license header) | **Fixed and upgraded to `v2.0.0`** (`implicit_space=True` by default, `implicit_space=False` for v1 compatibility) | ✅ **Fixed & Active** |
+| 2 | Lossless round-trip (`decode(encode(text)) == text`) | Returned lowercased text (`"Le roulement..."` → `"le roulement..."`) | **100% Lossless (`decode(encode(text)) == text`)**, using case prefix markers `ID 6` (TitleCase, e.g. `"Le"`) and `ID 5` (ALLCAPS, e.g. `"PLC"`, `"R08"`) | ✅ **100% Lossless in v2** |
+| 3 | Sequence length & space handling | Emitted a separate `<spazio>` token (`ID 10`) for every space (`31` tokens on the 14-word French example sentence; `2.33` tokens/word on the 177 Italian test texts) | **Implicit single space between words** (`ID 10 = <attaccato>` only when gluing sub-pieces or punctuation; `ID 9` for extra spaces): **23 tokens (-25.8%)** on the French example sentence (`1.85` tokens/word, `-20.4%` tokens on the 177 Italian test texts) | ✅ **Tokenizer v2 Active** |
 
 ---
 
@@ -96,24 +97,28 @@ The vocabulary uses a deterministic 5-digit index `SSvvv` (`00000` .. `32767`):
 
 ---
 
-## 🚀 Quick Usage in Python (Zero External Dependencies)
+## 🚀 Quick Usage in Python — Tokenizer v2 (Zero External Dependencies)
 
-`gptommy_tokenizer.py` is 100% self-contained and requires no external libraries:
+`gptommy_tokenizer.py` (`v2.0.0`) is 100% self-contained and requires no external libraries:
 
 ```python
 from gptommy_tokenizer import gpTommyTokenizer
 
-# 1. Initialize the tokenizer with gpTommy-32k-FR
+# 1. Initialize Tokenizer v2 with gpTommy-32k-FR (Implicit Space + Lossless Case by default)
 tokenizer = gpTommyTokenizer("gpTommy_vocab_by_id.txt")
 
-# 2. Encode a Français (French) sentence into token IDs
+# 2. Encode a Français (French) sentence into token IDs (23 tokens in v2 vs 31 in v1)
 text = "Le roulement à billes radial réduit le frottement de roulement dans la maintenance industrielle."
 token_ids = tokenizer.encode(text)
-print("Token IDs:", token_ids)
+print("Token IDs v2:", token_ids)
 
-# 3. Decode back to the exact original text
+# 3. Decode back to the exact original text (100% lossless, including capitalization!)
 decoded = tokenizer.decode(token_ids)
-print("Decoded:", decoded)
+print("Decoded v2:", decoded)
+assert decoded == text
+
+# 4. Optional: legacy v1 mode (explicit space tokens)
+tokenizer_v1 = gpTommyTokenizer("gpTommy_vocab_by_id.txt", implicit_space=False)
 ```
 
 ---
