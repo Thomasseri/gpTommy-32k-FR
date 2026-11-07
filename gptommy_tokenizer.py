@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 # ============================================================================
 # LEGAL NOTICE & WATERMARK: R08 NON-COMMERCIAL RESEARCH & ETHICAL LICENSE v2.0
 # Copyright (c) 2026 Thomas Seri (Sentinel). All Rights Reserved.
@@ -5,11 +6,11 @@
 # Clean-room reverse engineering, distillation, commercial or military use
 # is strictly prohibited and constitutes a breach of contract.
 # ============================================================================
+from __future__ import annotations
 __author__ = "Thomas Seri (Sentinel)"
 __license__ = "R08-Non-Commercial-Ethical-License-v2.0"
 __jurisdiction__ = "Court of Milan, Italy"
 
-#!/usr/bin/env python3
 """gpTommy 32k Tokenizer: Tokenizer nativo ad alta efficienza per la lingua italiana.
 Autore & Ideatore: Thomas Seri (Sentinel)
 Ecosistema: Sentinel LifeOS (https://www.sentinelhub.eu)
@@ -21,7 +22,6 @@ Vocabolario strutturato a schede (SSvvv):
 - 1.925 caratteri singoli, punteggiatura, cifre e simboli matematici
 - 1.069 token speciali di dialogo AI (<|user|>, <|assistant|>, <|system|>, <|think|>)
 """
-from __future__ import annotations
 
 import unicodedata
 from pathlib import Path

@@ -16,6 +16,18 @@
 
 ---
 
+## ⚠️ Corrections (7 November 2026)
+
+We re-checked the code published in this repository and found the following errors. Below: what was stated before and what we measured now.
+
+| # | Item | Before (stated) | Now (measured) | Status |
+|---|---|---|---|---|
+| 1 | `gptommy_tokenizer.py` | Self-contained tokenizer, ready-to-run usage example | The file **could not be imported** on any Python version: `SyntaxError` because `from __future__ import annotations` came after the license header | **Fixed** in this update (only the import line was moved; the license is unchanged) |
+| 2 | Lossless round-trip | `decode(encode(text))` returns the original text | It returns the text **fully lowercased** (e.g. `"The bearing…"` → `"the bearing…"`): capital letters are lost | Documented, not yet fixed |
+| 3 | Sequence length | Whole words = 1 token each | The space between words is a **separate token** (id 10). On the Italian edition we measured that spaces are 41.1% of all tokens (2.33 tokens per word overall). Not yet measured for this language | Documented |
+
+---
+
 > ### 💼 Investment, Compute Grants & Enterprise Licensing (Investimenti & Partnership Industriali)
 > 🇬🇧 **Sentinel** is scaling the **Geodesic Pyramidal Sphere Architecture (`R-08`)** from 50M to **110M–1B+ parameters**, with **a patent application filed at the Italian Patent and Trademark Office (UIBM)**.  
 > **Open to Seed / Deep-Tech Investment, GPU/TPU Compute Grants, and Enterprise R&D Partnerships.**  
